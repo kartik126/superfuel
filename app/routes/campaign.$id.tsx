@@ -1,7 +1,8 @@
-import { Form, useFetcher, useLoaderData } from "@remix-run/react";
+import { Form, Link, useFetcher, useLoaderData } from "@remix-run/react";
 import { json } from "@remix-run/node";
 import prisma from "~/utils/db.server";
 import { useEffect, useState } from "react";
+import { Button } from "~/components/ui/button";
 
 type Keyword = {
     id: string;
@@ -87,7 +88,12 @@ const CampaignDetails = () => {
 
     return (
         <div className="container mx-auto px-4 py-8">
-            <h1 className="text-2xl font-bold mb-6">Campaign Details</h1>
+            <div className="flex items-center justify-between mb-6">
+                <h1 className="text-2xl font-bold">Campaign Details</h1>
+                <Link to="/">
+                    <Button variant="outline">Back to Campaigns</Button>
+                </Link>
+            </div>
             <div className="bg-white shadow rounded-lg p-6">
                 <div className="mb-4">
                     <h2 className="text-lg font-semibold text-gray-700">Name</h2>
@@ -115,12 +121,11 @@ const CampaignDetails = () => {
                             />
                             <input type="hidden" name="intent" value="add_keyword" />
                             <input type="hidden" name="campaignId" value={campaign.id} />
-                            <button
+                            <Button
                                 type="submit"
-                                className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
                             >
                                 Add Keyword
-                            </button>
+                            </Button>
                         </div>
                     </div>
                 </Form>
